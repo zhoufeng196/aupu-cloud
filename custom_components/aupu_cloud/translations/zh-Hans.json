@@ -97,5 +97,11 @@
       "sms_flow_expired": "登录流程已超过本地十分钟期限，请重新开始。",
       "sms_attempts_exhausted": "本次登录尝试次数已用完，请重新开始。"
     }
+  },
+  "issues": {
+    "token_expiring": {
+      "title": "奥普令牌 {days} 天后过期",
+      "description": "{title} 的账户令牌将在 {date} 到期，到期后实体变为不可用。点『修复』重走一次短信登录即可（约 30 秒）。奥普云没有刷新接口，令牌无法自动续期。"
+    }
   }
 }
