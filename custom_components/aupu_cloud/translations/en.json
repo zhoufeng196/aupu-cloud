@@ -97,5 +97,11 @@
       "sms_flow_expired": "The local ten-minute login window expired.",
       "sms_attempts_exhausted": "This login flow has exhausted its attempts."
     }
+  },
+  "issues": {
+    "token_expiring": {
+      "title": "AUPU token expires in {days} days",
+      "description": "The account token for {title} expires at {date}; the entities will go unavailable. Click fix and repeat the SMS login (about 30 seconds). The AUPU cloud has no refresh endpoint, so the token cannot be renewed silently."
+    }
   }
 }
