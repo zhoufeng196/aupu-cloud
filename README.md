@@ -2,7 +2,9 @@
 
 奥普 Q360T5-Pro 浴霸的第三方 Home Assistant 自定义集成，支持状态读取、照明、运行模式、风档、人感设置和预约。
 
-**社区测试版 `0.4.0b1`。** 已在一个真实账户的两台 Q360T5-Pro 上验证短信登录、设备归属及云 MQTT 读取/重连。由个人设备接入工程整理，非奥普官方项目，与奥普及 Home Assistant 项目无隶属关系。
+**社区测试版 `0.4.1`。** 已在一个真实账户的两台 Q360T5-Pro 上验证短信登录、设备归属及云 MQTT 读取/重连。由个人设备接入工程整理，非奥普官方项目，与奥普及 Home Assistant 项目无隶属关系。
+
+> 本仓库是 [akachenyyds/aupu-cloud](https://github.com/akachenyyds/aupu-cloud) 的 fork，唯一改动是在 `client.py` 的产品白名单中放行 `10444`（奥普音乐浴霸 MC01S-Air），其余逻辑与上游一致。
 
 [![Checks](https://github.com/akachenyyds/aupu-cloud/actions/workflows/checks.yml/badge.svg)](https://github.com/akachenyyds/aupu-cloud/actions/workflows/checks.yml)
 
@@ -12,7 +14,7 @@
 
 | 项目 | 当前范围 |
 | --- | --- |
-| 设备 | Q360T5-Pro，云端产品 ID `10363`；其他型号不声明兼容 |
+| 设备 | Q360T5-Pro（`10363`）与 MC01S-Air 音乐浴霸（`10444`）；本 fork 放行 `10444`，其 shadow 的 `2.1 / 3.x / 4.1 / 5.2 / 6.x` 属性编号与 10363 一致 |
 | Home Assistant | `2026.9.4` / Python 3.14.2：121 项隔离测试通过；另有真实短信与云 MQTT 只读验收，详见 [审阅报告](docs/REVIEW.md) |
 | Python | 框架复验使用 Python 3.14；日常由 Home Assistant 管理运行环境 |
 | 传输 | REST 控制 + 云 MQTT 状态；或缓存凭据的云 MQTT 读写 |

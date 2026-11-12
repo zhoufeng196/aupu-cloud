@@ -22,6 +22,14 @@ from .scene_settings import (SCENE_NAMES, decode_human_scenes, decode_motion_nig
                              validate_configuration_changes, patch_human_scene,
                              patch_motion_night_light, patch_schedule)
 
+# Cloud product IDs that share the same function/property layout. 10363 is the
+# Q360T5-Pro captured by upstream; 10444 is the MC01S-Air music heater, whose
+# shadow uses the identical 2.1 / 3.x / 4.1 / 5.2 / 6.x property numbering.
+SUPPORTED_PIDS = {
+    10363: "奥普热能环系列双氧浴霸",
+    10444: "奥普音乐浴霸",
+}
+
 ORIGIN = "https://cn-north-1-prod.aupu.net:17606"
 IOT_HOST = "aii5h05kuofsj.ats.iot.cn-north-1.amazonaws.com.cn"
 FAMILY = "/iotservice/api/iot/family/list2"
@@ -132,10 +140,15 @@ class CloudAPI:
                 if not isinstance(device, dict):
                     raise CloudError("Unrecognized device record")
                 did = str(device.get("did", ""))
-                if device.get("pid") == 10363 and did.isdigit():
+                try:
+                    pid = int(device.get("pid"))
+                except (TypeError, ValueError):
+                    continue
+                if pid in SUPPORTED_PIDS and did.isdigit():
                     families[did] = fid
-                    devices[did] = {"did": did, "name": device.get("deviceName") or "奥普浴霸",
-                                    "product_name": device.get("productName") or "奥普热能环系列双氧浴霸"}
+                    devices[did] = {"did": did, "pid": pid,
+                                    "name": device.get("deviceName") or "奥普浴霸",
+                                    "product_name": device.get("productName") or SUPPORTED_PIDS[pid]}
         self._owned_devices = set(devices)
         self._device_families = families
         return list(devices.values())
