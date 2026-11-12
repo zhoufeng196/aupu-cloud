@@ -2,6 +2,7 @@
 from homeassistant.const import EVENT_HOMEASSISTANT_STOP, Platform
 
 from .coordinator import AupuCoordinator
+from .token_watch import async_setup_token_watch
 
 PLATFORMS = [Platform.LIGHT, Platform.SENSOR, Platform.SELECT, Platform.CLIMATE, Platform.BINARY_SENSOR, Platform.SWITCH]
 
@@ -14,6 +15,7 @@ async def async_setup_entry(hass, entry):
         await coordinator.async_shutdown()
         raise
     entry.runtime_data = coordinator
+    async_setup_token_watch(hass, entry)
     entry.async_on_unload(hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, coordinator.async_handle_stop))
     try:
         await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
