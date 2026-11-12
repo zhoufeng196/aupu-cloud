@@ -33,12 +33,12 @@ class AupuAIHeating(AupuEntity, ClimateEntity):
         return HVACMode.HEAT if value == 18 else HVACMode.OFF
 
     @property
-    def target_temperature(self):
+    def native_target_temperature(self):
         value = self.property_value("3", "3")
         return value if type(value) is int and MIN_TEMPERATURE <= value <= MAX_TEMPERATURE else None
 
     @property
-    def current_temperature(self):
+    def native_current_temperature(self):
         return self.reported_temperature
 
     async def async_set_temperature(self, **kwargs):
