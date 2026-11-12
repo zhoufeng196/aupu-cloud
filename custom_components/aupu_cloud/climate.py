@@ -14,7 +14,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
 
 class AupuAIHeating(AupuEntity, ClimateEntity):
     _attr_name = "AI恒温暖"
-    _attr_temperature_unit = UnitOfTemperature.CELSIUS
+    _attr_native_temperature_unit = UnitOfTemperature.CELSIUS
     _attr_min_temp = MIN_TEMPERATURE
     _attr_max_temp = MAX_TEMPERATURE
     _attr_target_temperature_step = TEMPERATURE_STEP
